@@ -14,8 +14,8 @@ library(leaflet)
 ```
 
 ```{r, include=FALSE}
-Ps <- rast("../resultater/Picea_sitchensis-epsg3857.tif")
-Th <- rast("../resultater/Tsuga_heterophylla-epsg3857.tif")
+Ps <- rast("./resultater/Picea_sitchensis-epsg3857.tif")
+Th <- rast("./resultater/Tsuga_heterophylla-epsg3857.tif")
 ```
 
 # Sitkagran (*Picea sitchensis*)
