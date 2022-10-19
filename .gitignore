@@ -1,6 +1,7 @@
 data/
 resultater/
-.qgz
-.RData
-.csv
+*.qgz
+*.RData
+*.csv
+*.Rproj
 .Rproj.user

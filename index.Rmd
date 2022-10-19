@@ -1,0 +1,109 @@
+---
+title: "Online supplement"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(terra)
+library(sf)
+library(leaflet)
+```
+
+```{r, include=FALSE}
+Ps <- rast("../resultater/Picea_sitchensis-epsg3857.tif")
+Th <- rast("../resultater/Tsuga_heterophylla-epsg3857.tif")
+```
+
+# Sitkagran (*Picea sitchensis*)
+
+```{r, out.width = '100%', warning=FALSE}
+domainvals <- range(log10(c(values(Ps$ssp126_2011.2040), 
+                            values(Ps$ssp126_2071.2100),
+                            values(Ps$ssp370_2071.2100))), na.rm = TRUE)
+pal <- colorNumeric(palette = "viridis", 
+                    domain = domainvals, na.color = "transparent")
+
+leaflet() %>%
+  setView(6.25, 60.9, zoom = 7) %>% 
+  addWMSTiles(
+    "https://opencache.statkart.no/gatekeeper/gk/gk.open",
+    layers = "topo4graatone",
+    attribution = "© Kartverket"
+  ) %>% 
+  addRasterImage(log10(Ps$ssp126_2011.2040), 
+                 group = "2011-2040 SSP1-2.6", colors = pal, opacity = 0.5) %>%
+  addRasterImage(Ps$ssp126_2011.2040_bin, 
+                 group = "2011-2040 SSP1-2.6 (0/1)", 
+                 colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
+  addRasterImage(Ps$ssp126_2011.2040_uncertainty, 
+                 group = "2011-2040 SSP1-2.6 usikkerhet", 
+                 colors = c("#fee0d2", "#fc9272", "#de2d26"), opacity = 0.5) %>%
+  addRasterImage(log10(Ps$ssp126_2071.2100), 
+                 group = "2071-2100 SSP1-2.6", colors = pal, opacity = 0.5) %>%
+  addRasterImage(Ps$ssp126_2071.2100_bin, 
+                 group = "2071-2100 SSP1-2.6 (0/1)", 
+                 colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
+  addRasterImage(log10(Ps$ssp370_2071.2100), 
+                 group = "2071-2100 SSP3-7.0", colors = pal, opacity = 0.5) %>%
+  addRasterImage(Ps$ssp370_2071.2100_bin, 
+                 group = "2071-2100 SSP3-7.0 (0/1)", 
+                 colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
+  addLegend(pal = pal, values = domainvals, bins = 5, 
+            labFormat = labelFormat(prefix = "10^(", suffix = ") landssnittet 2011-2040"), 
+            title = "Klimatisk egnethet") %>% 
+  addLayersControl(
+    baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 (0/1)", "2011-2040 SSP1-2.6 usikkerhet",
+                   "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 (0/1)",
+                   "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 (0/1)"),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+```
+
+# Vestamerikansk hemlokk (*Tsuga heterophylla*)
+
+```{r, out.width = '100%', warning=FALSE}
+domainvals <- range(log10(c(values(Th$ssp126_2011.2040), 
+                            values(Th$ssp126_2071.2100),
+                            values(Th$ssp370_2071.2100))), na.rm = TRUE)
+pal <- colorNumeric(palette = "viridis", 
+                    domain = domainvals, na.color = "transparent")
+
+leaflet() %>%
+  setView(6.25, 60.9, zoom = 7) %>% 
+  addWMSTiles(
+    "https://opencache.statkart.no/gatekeeper/gk/gk.open",
+    layers = "topo4graatone",
+    attribution = "© Kartverket"
+  ) %>% 
+  addRasterImage(log10(Th$ssp126_2011.2040), 
+                 group = "2011-2040 SSP1-2.6", colors = pal, opacity = 0.5) %>%
+  addRasterImage(Th$ssp126_2011.2040_bin, 
+                 group = "2011-2040 SSP1-2.6 (0/1)", 
+                 colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
+  addRasterImage(Th$ssp126_2011.2040_uncertainty, 
+                 group = "2011-2040 SSP1-2.6 usikkerhet", 
+                 colors = c("#fee0d2", "#fc9272", "#de2d26"), opacity = 0.5) %>%
+  addRasterImage(log10(Th$ssp126_2071.2100), 
+                 group = "2071-2100 SSP1-2.6", colors = pal, opacity = 0.5) %>%
+  addRasterImage(Th$ssp126_2071.2100_bin, 
+                 group = "2071-2100 SSP1-2.6 (0/1)", 
+                 colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
+  addRasterImage(log10(Th$ssp370_2071.2100), 
+                 group = "2071-2100 SSP3-7.0", colors = pal, opacity = 0.5) %>%
+  addRasterImage(Th$ssp370_2071.2100_bin, 
+                 group = "2071-2100 SSP3-7.0 (0/1)", 
+                 colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
+  addLegend(pal = pal, values = domainvals, bins = 5, 
+            labFormat = labelFormat(prefix = "10^(", suffix = ") landssnittet 2011-2040"), 
+            title = "Klimatisk egnethet") %>% 
+  addLayersControl(
+    baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 (0/1)", "2011-2040 SSP1-2.6 usikkerhet",
+                   "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 (0/1)",
+                   "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 (0/1)"),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+```
