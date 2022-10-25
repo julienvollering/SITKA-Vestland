@@ -37,7 +37,7 @@ leaflet() %>%
   addRasterImage(log10(Ps$ssp126_2011.2040), 
                  group = "2011-2040 SSP1-2.6", colors = pal, opacity = 0.5) %>%
   addRasterImage(Ps$ssp126_2011.2040_bin, 
-                 group = "2011-2040 SSP1-2.6 (0/1)", 
+                 group = "2011-2040 SSP1-2.6 (binær)", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addRasterImage(Ps$ssp126_2011.2040_uncertainty, 
                  group = "2011-2040 SSP1-2.6 usikkerhet", 
@@ -45,20 +45,20 @@ leaflet() %>%
   addRasterImage(log10(Ps$ssp126_2071.2100), 
                  group = "2071-2100 SSP1-2.6", colors = pal, opacity = 0.5) %>%
   addRasterImage(Ps$ssp126_2071.2100_bin, 
-                 group = "2071-2100 SSP1-2.6 (0/1)", 
+                 group = "2071-2100 SSP1-2.6 (binær)", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addRasterImage(log10(Ps$ssp370_2071.2100), 
                  group = "2071-2100 SSP3-7.0", colors = pal, opacity = 0.5) %>%
   addRasterImage(Ps$ssp370_2071.2100_bin, 
-                 group = "2071-2100 SSP3-7.0 (0/1)", 
+                 group = "2071-2100 SSP3-7.0 (binær)", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addLegend(pal = pal, values = domainvals, bins = 5, 
             labFormat = labelFormat(prefix = "10^(", suffix = ") landssnittet 2011-2040"), 
             title = "Klimatisk egnethet") %>% 
   addLayersControl(
-    baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 (0/1)", "2011-2040 SSP1-2.6 usikkerhet",
-                   "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 (0/1)",
-                   "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 (0/1)"),
+    baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 (binær)", "2011-2040 SSP1-2.6 usikkerhet",
+                   "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 (binær)",
+                   "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 (binær)"),
     options = layersControlOptions(collapsed = FALSE)
   )
 ```
@@ -82,7 +82,7 @@ leaflet() %>%
   addRasterImage(log10(Th$ssp126_2011.2040), 
                  group = "2011-2040 SSP1-2.6", colors = pal, opacity = 0.5) %>%
   addRasterImage(Th$ssp126_2011.2040_bin, 
-                 group = "2011-2040 SSP1-2.6 (0/1)", 
+                 group = "2011-2040 SSP1-2.6 (binær)", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addRasterImage(Th$ssp126_2011.2040_uncertainty, 
                  group = "2011-2040 SSP1-2.6 usikkerhet", 
@@ -90,20 +90,20 @@ leaflet() %>%
   addRasterImage(log10(Th$ssp126_2071.2100), 
                  group = "2071-2100 SSP1-2.6", colors = pal, opacity = 0.5) %>%
   addRasterImage(Th$ssp126_2071.2100_bin, 
-                 group = "2071-2100 SSP1-2.6 (0/1)", 
+                 group = "2071-2100 SSP1-2.6 (binær)", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addRasterImage(log10(Th$ssp370_2071.2100), 
                  group = "2071-2100 SSP3-7.0", colors = pal, opacity = 0.5) %>%
   addRasterImage(Th$ssp370_2071.2100_bin, 
-                 group = "2071-2100 SSP3-7.0 (0/1)", 
+                 group = "2071-2100 SSP3-7.0 (binær)", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addLegend(pal = pal, values = domainvals, bins = 5, 
             labFormat = labelFormat(prefix = "10^(", suffix = ") landssnittet 2011-2040"), 
             title = "Klimatisk egnethet") %>% 
   addLayersControl(
-    baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 (0/1)", "2011-2040 SSP1-2.6 usikkerhet",
-                   "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 (0/1)",
-                   "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 (0/1)"),
+    baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 (binær)", "2011-2040 SSP1-2.6 usikkerhet",
+                   "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 (binær)",
+                   "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 (binær)"),
     options = layersControlOptions(collapsed = FALSE)
   )
 ```
