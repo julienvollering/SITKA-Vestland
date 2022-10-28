@@ -18,6 +18,22 @@ Ps <- rast("./resultater/Picea_sitchensis-epsg3857.tif")
 Th <- rast("./resultater/Tsuga_heterophylla-epsg3857.tif")
 ```
 
+```{r, include=FALSE}
+psgbif <- read.delim("./data/0122203-220831081235567/0122203-220831081235567.csv") %>% 
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = "EPSG:4326")
+psgbif <- psgbif %>% 
+  st_transform(crs = crs(Ps)) %>% 
+  st_coordinates() %>% 
+  rasterize(Ps)
+
+thgbif <- read.delim("./data/0125719-220831081235567/0125719-220831081235567.csv") %>% 
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = "EPSG:4326")
+thgbif <- thgbif %>% 
+  st_transform(crs = crs(Th)) %>% 
+  st_coordinates() %>% 
+  rasterize(Th)
+```
+
 # Sitkagran (*Picea sitchensis*)
 
 ```{r, out.width = '100%', warning=FALSE}
@@ -52,6 +68,7 @@ leaflet() %>%
   addRasterImage(Ps$ssp370_2071.2100_bin, 
                  group = "2071-2100 SSP3-7.0 (binær)", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
+  addRasterImage(psgbif, group = "GBIF-funn (per oktober 2022)", colors = "black") %>% 
   addLegend(pal = pal, values = domainvals, bins = 5, 
             labFormat = labelFormat(prefix = "10^(", suffix = ") landssnittet 2011-2040"), 
             title = "Klimatisk egnethet") %>% 
@@ -59,6 +76,7 @@ leaflet() %>%
     baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 (binær)", "2011-2040 SSP1-2.6 usikkerhet",
                    "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 (binær)",
                    "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 (binær)"),
+    overlayGroups = "GBIF-funn (per oktober 2022)",
     options = layersControlOptions(collapsed = FALSE)
   )
 ```
@@ -100,10 +118,12 @@ leaflet() %>%
   addLegend(pal = pal, values = domainvals, bins = 5, 
             labFormat = labelFormat(prefix = "10^(", suffix = ") landssnittet 2011-2040"), 
             title = "Klimatisk egnethet") %>% 
+  addRasterImage(thgbif, group = "GBIF-funn (per oktober 2022)", colors = "black") %>% 
   addLayersControl(
     baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 (binær)", "2011-2040 SSP1-2.6 usikkerhet",
                    "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 (binær)",
                    "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 (binær)"),
+    overlayGroups = "GBIF-funn (per oktober 2022)",
     options = layersControlOptions(collapsed = FALSE)
   )
 ```
