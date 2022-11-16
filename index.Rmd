@@ -53,29 +53,30 @@ leaflet() %>%
   addRasterImage(log10(Ps$ssp126_2011.2040), 
                  group = "2011-2040 SSP1-2.6", colors = pal, opacity = 0.5) %>%
   addRasterImage(Ps$ssp126_2011.2040_bin, 
-                 group = "2011-2040 SSP1-2.6 (binær)", 
+                 group = "2011-2040 SSP1-2.6 terskelverdi", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addRasterImage(Ps$ssp126_2011.2040_uncertainty, 
                  group = "2011-2040 SSP1-2.6 usikkerhet", 
-                 colors = c("#fee0d2", "#fc9272", "#de2d26"), opacity = 0.5) %>%
+                 colors = c("#f0f0f0", "#bdbdbd", "#636363"), opacity = 0.75) %>%
   addRasterImage(log10(Ps$ssp126_2071.2100), 
                  group = "2071-2100 SSP1-2.6", colors = pal, opacity = 0.5) %>%
   addRasterImage(Ps$ssp126_2071.2100_bin, 
-                 group = "2071-2100 SSP1-2.6 (binær)", 
+                 group = "2071-2100 SSP1-2.6 terskelverdi", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addRasterImage(log10(Ps$ssp370_2071.2100), 
                  group = "2071-2100 SSP3-7.0", colors = pal, opacity = 0.5) %>%
   addRasterImage(Ps$ssp370_2071.2100_bin, 
-                 group = "2071-2100 SSP3-7.0 (binær)", 
+                 group = "2071-2100 SSP3-7.0 terskelverdi", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addRasterImage(psgbif, group = "GBIF-funn (per oktober 2022)", colors = "black") %>% 
   addLegend(pal = pal, values = domainvals, bins = 5, 
-            labFormat = labelFormat(prefix = "10^(", suffix = ") landssnittet 2011-2040"), 
+            labFormat = labelFormat(suffix = "x landssnittet 2011-2040",
+                                    transform = function(x) 10^x, digits = 4),
             title = "Klimatisk egnethet") %>% 
   addLayersControl(
-    baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 (binær)", "2011-2040 SSP1-2.6 usikkerhet",
-                   "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 (binær)",
-                   "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 (binær)"),
+    baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 terskelverdi", "2011-2040 SSP1-2.6 usikkerhet",
+                   "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 terskelverdi",
+                   "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 terskelverdi"),
     overlayGroups = "GBIF-funn (per oktober 2022)",
     options = layersControlOptions(collapsed = FALSE)
   )
@@ -100,29 +101,30 @@ leaflet() %>%
   addRasterImage(log10(Th$ssp126_2011.2040), 
                  group = "2011-2040 SSP1-2.6", colors = pal, opacity = 0.5) %>%
   addRasterImage(Th$ssp126_2011.2040_bin, 
-                 group = "2011-2040 SSP1-2.6 (binær)", 
+                 group = "2011-2040 SSP1-2.6 terskelverdi", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addRasterImage(Th$ssp126_2011.2040_uncertainty, 
                  group = "2011-2040 SSP1-2.6 usikkerhet", 
-                 colors = c("#fee0d2", "#fc9272", "#de2d26"), opacity = 0.5) %>%
+                 colors = c("#f0f0f0", "#bdbdbd", "#636363"), opacity = 0.75) %>%
   addRasterImage(log10(Th$ssp126_2071.2100), 
                  group = "2071-2100 SSP1-2.6", colors = pal, opacity = 0.5) %>%
   addRasterImage(Th$ssp126_2071.2100_bin, 
-                 group = "2071-2100 SSP1-2.6 (binær)", 
+                 group = "2071-2100 SSP1-2.6 terskelverdi", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addRasterImage(log10(Th$ssp370_2071.2100), 
                  group = "2071-2100 SSP3-7.0", colors = pal, opacity = 0.5) %>%
   addRasterImage(Th$ssp370_2071.2100_bin, 
-                 group = "2071-2100 SSP3-7.0 (binær)", 
+                 group = "2071-2100 SSP3-7.0 terskelverdi", 
                  colors = c("#440154", "#FDE725"), opacity = 0.5) %>%
   addLegend(pal = pal, values = domainvals, bins = 5, 
-            labFormat = labelFormat(prefix = "10^(", suffix = ") landssnittet 2011-2040"), 
+            labFormat = labelFormat(suffix = "x landssnittet 2011-2040",
+                                    transform = function(x) 10^x, digits = 3),
             title = "Klimatisk egnethet") %>% 
   addRasterImage(thgbif, group = "GBIF-funn (per oktober 2022)", colors = "black") %>% 
   addLayersControl(
-    baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 (binær)", "2011-2040 SSP1-2.6 usikkerhet",
-                   "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 (binær)",
-                   "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 (binær)"),
+    baseGroups = c("2011-2040 SSP1-2.6", "2011-2040 SSP1-2.6 terskelverdi", "2011-2040 SSP1-2.6 usikkerhet",
+                   "2071-2100 SSP1-2.6", "2071-2100 SSP1-2.6 terskelverdi",
+                   "2071-2100 SSP3-7.0", "2071-2100 SSP3-7.0 terskelverdi"),
     overlayGroups = "GBIF-funn (per oktober 2022)",
     options = layersControlOptions(collapsed = FALSE)
   )
