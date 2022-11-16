@@ -91,6 +91,14 @@ s3 <- st_intersection(filter(r2, ensemblebin == 0), filter(r2, ensemblebin == 1)
 bind_rows(s1, s2, s3) %>% 
   st_write("./resultater/Picea_sitchensis-binary-epsg25832.shp")
 
+psgbif <- read.delim("./data/0122203-220831081235567/0122203-220831081235567.csv") %>% 
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = "EPSG:4326")
+psgbif <- psgbif %>% 
+  st_transform(crs = crs(carto)) %>% 
+  st_coordinates() %>% 
+  rasterize(carto)
+writeRaster(psgbif, "./resultater/Picea_sitchensis-GBIF-epsg25832.tif", overwrite = TRUE)
+
 # T.h. 
 
 ## EPSG:3857
@@ -180,6 +188,14 @@ s3 <- st_intersection(filter(r2, ensemblebin == 0), filter(r2, ensemblebin == 1)
 
 bind_rows(s1, s2, s3) %>% 
   st_write("./resultater/Tsuga_heterophylla-binary-epsg25832.shp")
+
+thgbif <- read.delim("./data/0125719-220831081235567/0125719-220831081235567.csv") %>% 
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = "EPSG:4326")
+thgbif <- thgbif %>% 
+  st_transform(crs = crs(carto)) %>% 
+  st_coordinates() %>% 
+  rasterize(carto)
+writeRaster(thgbif, "./resultater/Tsuga_heterophylla-GBIF-epsg25832.tif", overwrite = TRUE)
 
 
 sessionInfo()
